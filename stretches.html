@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>STRETCH TIME</title>
+  <link rel="stylesheet" href="./style.css">
+    
+</head>
+<body>
+        <!-- popup -->
+    <div class="popup" id="popup1">
+        <p>This is a popup!</p>
+        <p>Overlay uses <b>box-shadow</b>.</p>
+          <p>(Doesn't block elements on background)</p>
+        <a href="#" onclick="hide('popup1')">Ok!</a>
+    </div>
+
+        <!-- count down -->
+        <div class="container"></div>
+
+        <!-- current pose image & self camera -->
+    <div class='alignVideo'>
+        <div>
+        <img src="http://dummyimage.com/700x400/000/#FFFFFF" />
+        <img src="http://dummyimage.com/400x400/000/#FFFFFF" />
+        <a href="#" class="arrow right"></a>
+    </div>
+    </div>
+
+    <!-- pose images on the bottom -->
+    <div class='alignPoseImg'>
+        <div>
+            <img id="pose1img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+            <img id="pose2img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+            <img id="pose3img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+            <img id="pose4img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+            <img id="pose5img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+            <img id="pose6img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+            <img id="pose7img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+            <img id="pose8img" src="http://dummyimage.com/100x100/000/#FFFFFF" />
+        </div>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js'></script><script src="script.js"></script>
+</body>
+
+</html>
+

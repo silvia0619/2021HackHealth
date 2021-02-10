@@ -1,0 +1,170 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #5CA4EA;
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+}
+
+  /* index.html ( the title & button )*/
+.button_container {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.startBtnCenter {
+    width: 180px;
+    height: 60px;
+    position: absolute;
+}
+  
+.btn {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #91C9FF;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+  
+svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+}
+  
+.btn:hover {
+    transition: 1s ease-in-out;
+    background: #4F95DA;
+}
+  
+.btn:hover svg {
+    stroke-dashoffset: -480;
+}
+  
+.btn span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+  /* index.html */
+
+
+  /* stretches.html */
+.alignVideo{
+    margin: 3rem;
+    text-align: center;
+    position: relative;
+}
+
+.alignPoseImg{
+    text-align:center;
+    width:100%;
+    bottom:0px;
+    position: fixed;
+}
+
+  /*arrow*/
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    width: 3vmin;
+    height: 3vmin;
+    background: transparent;
+    border-top: 1vmin solid white;
+    border-right: 1vmin solid white;
+    box-shadow: 0 0 0 lightgray;
+    transition: all 200ms ease;
+  }
+  .arrow.left {
+    left: 0;
+    transform: translate3d(0, -50%, 0) rotate(-135deg);
+  }
+  .arrow.right {
+    right: 0;
+    transform: translate3d(0, -50%, 0) rotate(45deg);
+  }
+  .arrow:hover {
+    border-color: yellowgreen;
+    box-shadow: 0.5vmin -0.5vmin 0 white;
+  }
+  .arrow:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -60%) rotate(45deg);
+    width: 200%;
+    height: 200%;
+  }
+
+  /*popup*/
+  .popup {
+    display: block;
+    position: fixed;
+    padding: 10px;
+    width: 280px;
+    left: 50%;
+    margin-left: -150px;
+    height: 180px;
+    top: 50%;
+    margin-top: -100px;
+    background: #FFF;
+    z-index: 20;
+  }
+  
+  #popup1 {
+    -webkit-box-shadow:  0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+    box-shadow:  0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+  }
+
+  /*count down*/
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: auto;
+  z-index: 3;
+}
+
+.path--background {
+  fill: rgb(34, 213, 201);
+  stroke: #fff;
+  stroke-width: 0px;
+}
+
+.pulse {
+  fill: rgb(255, 74, 74) !important;
+}
+
+.path--foreground {
+  fill: #eee;
+  stroke: #eee;
+  stroke-width: 2px;
+}
+
+.label {
+  font: 90px "Open Sans";
+  font-weight: 900;
+  text-anchor: middle;
+  fill: rgb(34, 213, 201);
+}
