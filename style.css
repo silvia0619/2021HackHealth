@@ -168,3 +168,9 @@ svg {
   text-anchor: middle;
   fill: rgb(34, 213, 201);
 }
+
+/*timer*/
+
+.timer {
+  color: white;
+}

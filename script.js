@@ -1,6 +1,84 @@
+
+
+//start
+
+// More API functions here:
+// https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
+
+// the link to your model provided by Teachable Machine export panel
+const URL = "https://teachablemachine.withgoogle.com/models/TotAz-OSI/";
+let model, webcam, ctx, labelContainer, maxPredictions;
+
+async function init() {
+  console.log("init work?????????????????")
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+
+    // load the model and metadata
+    // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+    // Note: the pose library adds a tmPose object to your window (window.tmPose)
+    model = await tmPose.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+
+    // Convenience function to setup a webcam
+    const size = 400;
+    const flip = true; // whether to flip the webcam
+    webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+    await webcam.setup(); // request access to the webcam
+    await webcam.play();
+    window.requestAnimationFrame(loop);
+
+    // append/get elements to the DOM
+    const canvas = document.getElementById("canvas");
+    canvas.width = size; canvas.height = size;
+    ctx = canvas.getContext("2d");
+    labelContainer = document.getElementById("label-container");
+    for (let i = 0; i < maxPredictions; i++) { // and class labels
+        labelContainer.appendChild(document.createElement("div"));
+    }
+}
+
+async function loop(timestamp) {
+    webcam.update(); // update the webcam frame
+    await predict();
+    window.requestAnimationFrame(loop);
+}
+
+async function predict() {
+    // Prediction #1: run input through posenet
+    // estimatePose can take in an image, video or canvas html element
+    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+    // Prediction 2: run input through teachable machine classification model
+    const prediction = await model.predict(posenetOutput);
+
+    for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction =
+            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+        labelContainer.childNodes[i].innerHTML = classPrediction;
+    }
+
+    // finally draw the poses
+    drawPose(pose);
+}
+
+function drawPose(pose) {
+    if (webcam.canvas) {
+        ctx.drawImage(webcam.canvas, 0, 0);
+        // draw the keypoints and skeleton
+        if (pose) {
+            const minPartConfidence = 0.5;
+            tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+            tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+        }
+    }
+}
+
+//start & end button
+
 function startButton(){
     console.log("*******init function test");
     location.replace('stretches.html');
+    init();
 }
 
 function getBackToWorkButton(){
@@ -20,132 +98,21 @@ var hide = function(id) {
     $(id).style.display ='none';
 }
 
+function okButton(){
+  hide('popup1');
+  init();
+}
+
 //count down
 
-var width = 400,
-  height = 400,
-  timePassed = 0,
-  timeLimit = 10;
+var time = 10;
+var sec = "";
+var timer = setInterval(function(){
+    sec = time;        
+    document.getElementById("timerId").innerHTML = sec;
+    time--;
 
-var fields = [{
-  value: timeLimit,
-  size: timeLimit,
-  update: function() {
-    return timePassed = timePassed + 1;
-  }
-}];
-
-var nilArc = d3.svg.arc()
-  .innerRadius(width / 3 - 133)
-  .outerRadius(width / 3 - 133)
-  .startAngle(0)
-  .endAngle(2 * Math.PI);
-
-var arc = d3.svg.arc()
-  .innerRadius(width / 3 - 55)
-  .outerRadius(width / 3 - 25)
-  .startAngle(0)
-  .endAngle(function(d) {
-    return ((d.value / d.size) * 2 * Math.PI);
-  });
-
-var svg = d3.select(".container").append("svg")
-  .attr("width", width)
-  .attr("height", height);
-
-var field = svg.selectAll(".field")
-  .data(fields)
-  .enter().append("g")
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-  .attr("class", "field");
-
-var back = field.append("path")
-  .attr("class", "path path--background")
-  .attr("d", arc);
-
-var path = field.append("path")
-  .attr("class", "path path--foreground");
-
-var label = field.append("text")
-  .attr("class", "label")
-  .attr("dy", ".35em");
-
-(function update() {
-
-  field
-    .each(function(d) {
-      d.previous = d.value, d.value = d.update(timePassed);
-    });
-
-  path.transition()
-    .ease("elastic")
-    .duration(500)
-    .attrTween("d", arcTween);
-
-  if ((timeLimit - timePassed) <= 10)
-    pulseText();
-  else
-    label
-    .text(function(d) {
-      return d.size - d.value;
-    });
-
-  if (timePassed <= timeLimit)
-    setTimeout(update, 1000 - (timePassed % 1000));
-  else
-    destroyTimer();
-
-})();
-
-function pulseText() {
-  back.classed("pulse", true);
-  label.classed("pulse", true);
-
-  if ((timeLimit - timePassed) >= 0) {
-    label.style("font-size", "120px")
-      .attr("transform", "translate(0," + +4 + ")")
-      .text(function(d) {
-        return d.size - d.value;
-      });
-  }
-
-  label.transition()
-    .ease("elastic")
-    .duration(900)
-    .style("font-size", "90px")
-    .attr("transform", "translate(0," + -10 + ")");
-}
-
-function destroyTimer() {
-  label.transition()
-    .ease("back")
-    .duration(700)
-    .style("opacity", "0")
-    .style("font-size", "5")
-    .attr("transform", "translate(0," + -40 + ")")
-    .each("end", function() {
-      field.selectAll("text").remove()
-    });
-
-  path.transition()
-    .ease("back")
-    .duration(700)
-    .attr("d", nilArc);
-
-  back.transition()
-    .ease("back")
-    .duration(700)
-    .attr("d", nilArc)
-    .each("end", function() {
-      field.selectAll("path").remove()
-    });
-}
-
-function arcTween(b) {
-  var i = d3.interpolate({
-    value: b.previous
-  }, b);
-  return function(t) {
-    return arc(i(t));
-  };
-}
+    if(sec<1){
+        clearInterval(timer);
+    }
+}, 1000);
