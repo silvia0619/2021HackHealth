@@ -116,3 +116,9 @@ var timer = setInterval(function(){
         clearInterval(timer);
     }
 }, 1000);
+
+//next button
+
+function next(){
+    console.log("ttttttttttttthe next button");
+}

@@ -74,6 +74,15 @@ svg {
   left: 7%;
 }
 
+.timer{
+  position: absolute;
+  font-size: 50px;
+  left: 5%;
+  top: 5%;
+  font-weight: bold;
+  color: white;
+}
+
 .livePose{
   position: absolute;
   top: 10%;
@@ -88,39 +97,22 @@ svg {
 }
 
   /*arrow*/
-  
   .arrow {
-    position: absolute;
+    border: solid yellowgreen;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 12px;
+    right: 5%;
     top: 50%;
-    width: 3vmin;
-    height: 3vmin;
-    background: transparent;
-    border-top: 1vmin solid white;
-    border-right: 1vmin solid white;
-    box-shadow: 0 0 0 lightgray;
-    transition: all 200ms ease;
-  }
-  .arrow.left {
-    left: 0;
-    transform: translate3d(0, -50%, 0) rotate(-135deg);
-  }
-  .arrow.right {
-    right: 0;
-    transform: translate3d(0, -50%, 0) rotate(45deg);
-  }
-  .arrow:hover {
-    border-color: yellowgreen;
-    box-shadow: 0.5vmin -0.5vmin 0 white;
-  }
-  .arrow:before {
-    content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-40%, -60%) rotate(45deg);
-    width: 200%;
-    height: 200%;
   }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+
 
   /*popup*/
   .popup {
@@ -179,6 +171,3 @@ svg {
 
 /*timer*/
 
-.timer {
-  color: white;
-}
