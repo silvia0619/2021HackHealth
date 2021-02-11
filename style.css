@@ -67,10 +67,17 @@ svg {
 
 
   /* stretches.html */
-.alignVideo{
-    margin: 3rem;
-    text-align: center;
-    position: relative;
+
+.poseImg{
+  position: absolute;
+  top: 10%;
+  left: 7%;
+}
+
+.livePose{
+  position: absolute;
+  top: 10%;
+  right: 7%;
 }
 
 .alignPoseImg{
