@@ -71,7 +71,7 @@ svg {
 .poseImg{
   position: absolute;
   top: 10%;
-  left: 7%;
+  left:15%;
 }
 
 .timer{
@@ -86,7 +86,7 @@ svg {
 .livePose{
   position: absolute;
   top: 10%;
-  right: 7%;
+  right:15%;
 }
 
 .alignPoseImg{
