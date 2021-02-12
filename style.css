@@ -68,6 +68,11 @@ svg {
 
   /* stretches.html */
 
+.alignImgVid{
+  top: 10%;
+  
+}
+
 .poseImg{
   position: absolute;
   top: 10%;

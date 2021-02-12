@@ -79,7 +79,7 @@ function drawPose(pose) {
 function startButton(){
     console.log("*******init function test");
     location.replace('stretches.html');
-    init();
+    //init();
 }
 
 function getBackToWorkButton(){
@@ -101,7 +101,7 @@ var hide = function(id) {
 
 function okButton(){
   hide('popup1');
-  init();
+  //init();
 }
 
 //count down
