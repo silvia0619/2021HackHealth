@@ -140,17 +140,24 @@ function theTimer(){
         sec = time;        
         document.getElementById("timerId").innerHTML = sec;
         time--;
-
+        if(time <= 5){
+        var voice = new Audio("./voice/"+ (time + 1) + ".mp3")
+        voice.play();
+        }
+        
         if(sec<1){
             clearInterval(timer);
             started = false;
         }
     }, 1000);
+<<<<<<< HEAD
 
     if(classNum == 6){
         location.replace('goodjobs.html');
     }
     
+=======
+>>>>>>> 83f0ab1d94b2c1544efc95c612cceb2deab5a65f
 }
 
 
