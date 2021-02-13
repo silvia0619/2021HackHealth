@@ -128,7 +128,13 @@ function okButton(){
 function theTimer(){
     started = true;
     console.log("how many times does the timer work?");
-    time = 10;
+    if(classNum == 0 || classNum == 2 || classNum == 3 || classNum == 6){   
+        time = 20;
+    }
+    else{
+        time = 10;
+    }
+    
     var sec = "";
     var timer = setInterval(function(){
         sec = time;        
@@ -141,7 +147,7 @@ function theTimer(){
         }
     }, 1000);
 
-    if(classNum ==6 ){
+    if(classNum == 6){
         location.replace('goodjobs.html');
     }
     
