@@ -1,4 +1,3 @@
-
 //start
 
 // More API functions here:
@@ -9,7 +8,6 @@ const URL = "./my_model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 
 async function init() {
-  console.log("init work?????????????????")
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
@@ -68,17 +66,31 @@ async function predict() {
     drawPose(pose);
 }
 function onlyOnce(){
-     console.log(executed);
-        if(!executed){
-            executed = true;
-        }
-        theTimer();
-        add();
+     //console.log(executed);
+     //   if(!executed){
+     //       executed = true;
+     //   }
+     var forGrayIdd = "images/gray-" + classNum + "-1.jpg";
+     var forGrayId = "images/gray-" + classNum + ".jpg";
+     var whereTo = "pose" + classNum + "img";
+     if(classNum == 0 || classNum == 2 || classNum == 4){
+        document.getElementById(whereTo).src = forGrayIdd; 
+        
+    }
+    else{
+        document.getElementById(whereTo).src = forGrayId; 
+        
+    }
+    theTimer();
+    
+    add();
+    
 }
 function add(){
     console.log("class Number", classNum);
     classNum++;
-    executed = false;
+   
+    //executed = false;
 }
 
 
@@ -127,26 +139,57 @@ function okButton(){
 //count down
 function theTimer(){
     started = true;
+    var theClassNum = classNum
+    console.log(theClassNum, "theclassNum");
     console.log("how many times does the timer work?");
-    time = 10;
+    if(classNum == 0 || classNum == 2 || classNum == 4){
+        time = 20;
+    }
+    else{
+        time = 10;
+    }
     var sec = "";
     var timer = setInterval(function(){
         sec = time;        
         document.getElementById("timerId").innerHTML = sec;
-        
-        if(time <= 5){
+
+        if(time == 11){
+            var forIdd = "images/" + theClassNum + "-2.jpg"
+            document.getElementById("poseImg").src = forIdd; 
+            
+        }
+        /*if(time <= 5){
         var voice = new Audio("./voice/"+ (time) + ".mp3")
         voice.play();
-        }
+        }*/
         time--;
+
+        if(time < 0){
+            console.log("NOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            var forIdd = "images/" + (theClassNum + 1) + "-1.jpg";
+            var forId = "images/" + (theClassNum + 1) + ".jpg";
+            
+            if((theClassNum + 1) == 0 || (theClassNum + 1) == 2 || (theClassNum + 1) == 4){
+                document.getElementById("poseImg").src = forIdd;
+                
+            }
+            else{
+                document.getElementById("poseImg").src = forId;
+                
+            }
+        
+        }
+    
         if(sec<1){
+            if(classNum == 5) {
+                location.replace("./goodjob.html");
+            }
             clearInterval(timer);
             started = false;
-            if (classNum == 6){
-                location.replace("./goodjob.html")
-            }
+            
         }
     }, 1000);
+    
 }
 
 
@@ -155,7 +198,7 @@ function theTimer(){
 function next(){
     console.log("nnnnnnnnnnnnn");
     classNum++;
-    executed = false;
+    //executed = false;
     started = false;
     time = 10;
 }
