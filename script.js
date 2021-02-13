@@ -1,5 +1,3 @@
-function startStretch() {
-}
 
 //start
 
@@ -35,16 +33,20 @@ async function init() {
     ctx = canvas.getContext("2d");
     labelContainer = document.getElementById("label-container");
     for (let i = 0; i < maxPredictions; i++) { // and class labels
-        console.log("the for loop$$$$$$$$$$$$$$$$")
         labelContainer.appendChild(document.createElement("div"));
     }
+    
 }
-
+var time = 0;
 async function loop(timestamp) {
     webcam.update(); // update the webcam frame
     await predict();
     window.requestAnimationFrame(loop);
 }
+
+var classNum = 0;
+var executed = false;
+var started = false;
 
 async function predict() {
     // Prediction #1: run input through posenet
@@ -59,9 +61,26 @@ async function predict() {
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
 
+    if(prediction[classNum].probability >= 0.8 && !started){
+       onlyOnce();
+    }
     // finally draw the poses
     drawPose(pose);
 }
+function onlyOnce(){
+     console.log(executed);
+        if(!executed){
+            executed = true;
+        }
+        theTimer();
+        add();
+}
+function add(){
+    console.log("class Number", classNum);
+    classNum++;
+    executed = false;
+}
+
 
 function drawPose(pose) {
     if (webcam.canvas) {
@@ -106,18 +125,23 @@ function okButton(){
 }
 
 //count down
+function theTimer(){
+    started = true;
+    console.log("how many times does the timer work?");
+    time = 10;
+    var sec = "";
+    var timer = setInterval(function(){
+        sec = time;        
+        document.getElementById("timerId").innerHTML = sec;
+        time--;
 
-var time = 10;
-var sec = "";
-var timer = setInterval(function(){
-    sec = time;        
-    document.getElementById("timerId").innerHTML = sec;
-    time--;
+        if(sec<1){
+            clearInterval(timer);
+            started = false;
+        }
+    }, 1000);
+}
 
-    if(sec<1){
-        clearInterval(timer);
-    }
-}, 1000);
 
 //next button
 
