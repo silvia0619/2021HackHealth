@@ -148,6 +148,9 @@ function theTimer(){
         if(sec<1){
             clearInterval(timer);
             started = false;
+            if (classNum == 6){
+                location.replace("./goodjob.html")
+            }
         }
     }, 1000);
 <<<<<<< HEAD
