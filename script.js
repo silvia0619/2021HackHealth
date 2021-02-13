@@ -140,6 +140,11 @@ function theTimer(){
             started = false;
         }
     }, 1000);
+
+    if(classNum ==6 ){
+        location.replace('goodjobs.html');
+    }
+    
 }
 
 
@@ -147,4 +152,5 @@ function theTimer(){
 
 function next(){
     console.log("ttttttttttttthe next button");
+    
 }
