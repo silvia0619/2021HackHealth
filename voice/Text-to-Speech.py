@@ -5,5 +5,5 @@ def generateVoice(text):
     filename=text + ".mp3"
     tts.save(filename)
 
-generateVoice("Also stretch the other side")
+generateVoice("Full body stretch will begin. Fit your full body in the webcam.")
 

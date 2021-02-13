@@ -62,7 +62,11 @@ async function predict() {
         specialflag = true;
         classNum = 5;
     }
-    if(prediction[classNum].probability >= 0.8 && !started){
+    if (classNum == 4){
+        var voice = new Audio("./voice/Full body stretch will begin. Fit your full body in the webcam.mp3")
+        voice.play();
+    }
+    if(prediction[classNum].probability == 1.0 && !started){
        onlyOnce();
     }
     // finally draw the poses
