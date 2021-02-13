@@ -119,13 +119,13 @@ svg {
   
 
 
-  /*popup*/
-  .popup {
+   /*popup*/
+   .popup {
     display: block;
     position: fixed;
     padding: 10px;
-    width: 280px;
-    left: 50%;
+    width: 480px;
+    left: 42%;
     margin-left: -150px;
     height: 180px;
     top: 50%;
@@ -134,6 +134,7 @@ svg {
     z-index: 20;
     text-align: center;
   }
+
   
   #popup1 {
     -webkit-box-shadow:  0px 0px 0px 9999px rgba(0, 0, 0, 0.5);

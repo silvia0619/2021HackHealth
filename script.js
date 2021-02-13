@@ -153,14 +153,6 @@ function theTimer(){
             }
         }
     }, 1000);
-<<<<<<< HEAD
-
-    if(classNum == 6){
-        location.replace('goodjobs.html');
-    }
-    
-=======
->>>>>>> 83f0ab1d94b2c1544efc95c612cceb2deab5a65f
 }
 
 
