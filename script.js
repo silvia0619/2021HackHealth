@@ -134,10 +134,17 @@ function theTimer(){
         sec = time;        
         document.getElementById("timerId").innerHTML = sec;
         time--;
-
+        if(time <= 5){
+        var voice = new Audio("./voice/"+ (time + 1) + ".mp3")
+        voice.play();
+        }
+        
         if(sec<1){
             clearInterval(timer);
             started = false;
+            if (classNum == 6){
+                location.replace("./goodjob.html")
+            }
         }
     }, 1000);
 }
@@ -147,4 +154,5 @@ function theTimer(){
 
 function next(){
     console.log("ttttttttttttthe next button");
+    
 }
