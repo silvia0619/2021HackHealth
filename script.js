@@ -53,11 +53,11 @@ async function predict() {
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
 
-    for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction =
-            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
-    }
+    // for (let i = 0; i < maxPredictions; i++) {
+    //     const classPrediction =
+    //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+    //     labelContainer.childNodes[i].innerHTML = classPrediction;
+    // }
     if (classNum == 6){
         specialflag = true;
         classNum = 5;
@@ -159,6 +159,8 @@ function theTimer(){
         if(time == 11){
             var forIdd = "images/" + theClassNum + "-2.jpg"
             document.getElementById("poseImg").src = forIdd; 
+            var voice = new Audio("./voice/Also stretch the other side.mp3")
+            voice.play();
             
         }
         if(time <= 5){

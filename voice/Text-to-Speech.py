@@ -5,5 +5,5 @@ def generateVoice(text):
     filename=text + ".mp3"
     tts.save(filename)
 
-generateVoice("1")
+generateVoice("Also stretch the other side")
 
