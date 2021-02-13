@@ -133,12 +133,12 @@ function theTimer(){
     var timer = setInterval(function(){
         sec = time;        
         document.getElementById("timerId").innerHTML = sec;
-        time--;
+        
         if(time <= 5){
-        var voice = new Audio("./voice/"+ (time + 1) + ".mp3")
+        var voice = new Audio("./voice/"+ (time) + ".mp3")
         voice.play();
         }
-        
+        time--;
         if(sec<1){
             clearInterval(timer);
             started = false;
@@ -153,6 +153,9 @@ function theTimer(){
 //next button
 
 function next(){
-    console.log("ttttttttttttthe next button");
-    
+    console.log("nnnnnnnnnnnnn");
+    classNum++;
+    executed = false;
+    started = false;
+    time = 10;
 }
