@@ -128,23 +128,18 @@ function okButton(){
 function theTimer(){
     started = true;
     console.log("how many times does the timer work?");
-    if(classNum == 0 || classNum == 2 || classNum == 3 || classNum == 6){   
-        time = 20;
-    }
-    else{
-        time = 10;
-    }
+    time = 10;
     
     var sec = "";
     var timer = setInterval(function(){
         sec = time;        
         document.getElementById("timerId").innerHTML = sec;
-        time--;
+        
         if(time <= 5){
-        var voice = new Audio("./voice/"+ (time + 1) + ".mp3")
+        var voice = new Audio("./voice/"+ (time) + ".mp3")
         voice.play();
         }
-        
+        time--;
         if(sec<1){
             clearInterval(timer);
             started = false;
@@ -159,6 +154,9 @@ function theTimer(){
 //next button
 
 function next(){
-    console.log("ttttttttttttthe next button");
+    time = 10;
+    classNum++;
+    executed = false;
+    started = false;
     
 }
