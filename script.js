@@ -45,7 +45,9 @@ async function loop(timestamp) {
 var classNum = 0;
 var executed = false;
 var started = false;
-var specialflag = false
+var specialflag1 = false
+var specialflag2 = false
+
 async function predict() {
     // Prediction #1: run input through posenet
     // estimatePose can take in an image, video or canvas html element
@@ -59,12 +61,13 @@ async function predict() {
     //     labelContainer.childNodes[i].innerHTML = classPrediction;
     // }
     if (classNum == 6){
-        specialflag = true;
+        specialflag1 = true;
         classNum = 5;
     }
-    if (classNum == 4){
-        var voice = new Audio("./voice/Full body stretch will begin. Fit your full body in the webcam.mp3")
+    if (classNum == 4 && !specialflag2){
+        var voice = new Audio("./voice/Full body stretch will begin. Fit your full body in the webcam.mp3");
         voice.play();
+        specialflag2 = true;
     }
     if(prediction[classNum].probability == 1.0 && !started){
        onlyOnce();
@@ -173,7 +176,7 @@ function theTimer(){
         }
         time--;
 
-        if(time == -1 && classNum == 5 && specialflag) {
+        if(time == -1 && classNum == 5 && specialflag1) {
             location.replace("./goodjob.html");
         }
         if(time < 0){
