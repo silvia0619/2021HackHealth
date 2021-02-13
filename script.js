@@ -45,7 +45,7 @@ async function loop(timestamp) {
 var classNum = 0;
 var executed = false;
 var started = false;
-
+var specialflag = false
 async function predict() {
     // Prediction #1: run input through posenet
     // estimatePose can take in an image, video or canvas html element
@@ -58,7 +58,10 @@ async function predict() {
             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
-
+    if (classNum == 6){
+        specialflag = true;
+        classNum = 5;
+    }
     if(prediction[classNum].probability >= 0.8 && !started){
        onlyOnce();
     }
@@ -158,13 +161,17 @@ function theTimer(){
             document.getElementById("poseImg").src = forIdd; 
             
         }
-        /*if(time <= 5){
+        if(time <= 5){
         var voice = new Audio("./voice/"+ (time) + ".mp3")
         voice.play();
-        }*/
+        }
         time--;
 
+        if(time == -1 && classNum == 5 && specialflag) {
+            location.replace("./goodjob.html");
+        }
         if(time < 0){
+            
             console.log("NOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             var forIdd = "images/" + (theClassNum + 1) + "-1.jpg";
             var forId = "images/" + (theClassNum + 1) + ".jpg";
@@ -174,16 +181,17 @@ function theTimer(){
                 
             }
             else{
+                if(classNum == 6) {
+                    location.replace("./goodjob.html");
+                }
                 document.getElementById("poseImg").src = forId;
                 
             }
         
         }
+        
     
         if(sec<1){
-            if(classNum == 5) {
-                location.replace("./goodjob.html");
-            }
             clearInterval(timer);
             started = false;
             
